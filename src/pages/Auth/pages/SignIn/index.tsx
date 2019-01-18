@@ -53,7 +53,7 @@ class SignInComponent extends Component<any, any> {
     signInInputs.forEach((input) => initialValues[input.name] = '');
 
     if(signedIn) {
-      return (<Redirect to='/' />);
+      return <Redirect to='/' />;
     }
 
     return (

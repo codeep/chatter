@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -26,8 +27,30 @@ const styles = (theme: any) => ({
 });
 
 class NavBar extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      signedOut: false,
+    };
+
+    this.handleSignOut =  this.handleSignOut.bind(this);
+  }
+  handleSignOut() {
+    localStorage.removeItem('auth-token');
+
+    this.setState({
+      signedOut: true,
+    });
+  }
+
   render() {
     const { classes } = this.props;
+    const { signedOut } = this.state;
+
+    if(signedOut) {
+      return <Redirect to='/sign-in' />; 
+    }
 
     return (
       <div className={classes.root}>
@@ -39,7 +62,7 @@ class NavBar extends React.Component<any, any> {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               News
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={this.handleSignOut}>Sign out</Button>
           </Toolbar>
         </AppBar>
       </div>
