@@ -7,7 +7,21 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-const InputRenderer = (props: any) => {
+
+type Props = {
+  label: string;
+  name: string;
+  value: string;
+  values?: any;
+  errors?: any;
+  touched?: any;
+  handler?: (...args: any[]) => void;
+  type: string;
+  formControlProps?: object;
+  inputProps?: object;
+};
+
+const InputRenderer = (props: Props) => {
   const { label, name, value, values, errors, touched, handler, type, formControlProps, inputProps } = props;
   const errCondition = errors && touched && errors[name] && touched[name];
 

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
-const styles = (theme: any) => ({
+const styles = (theme: any): any => ({
   root: {
     flexGrow: 1,
   },
@@ -26,31 +24,26 @@ const styles = (theme: any) => ({
   },
 });
 
-class NavBar extends React.Component<any, any> {
+type Props = {
+  classes: any;
+  history: any;
+};
+
+class NavBar extends React.Component<Props> {
   constructor(props: any) {
     super(props);
 
-    this.state = {
-      signedOut: false,
-    };
-
-    this.handleSignOut =  this.handleSignOut.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
   handleSignOut() {
-    localStorage.removeItem('auth-token');
+    const { history } = this.props;
 
-    this.setState({
-      signedOut: true,
-    });
+    localStorage.removeItem('auth-token');
+    history.push('/sign-in');    
   }
 
   render() {
     const { classes } = this.props;
-    const { signedOut } = this.state;
-
-    if(signedOut) {
-      return <Redirect to='/sign-in' />; 
-    }
 
     return (
       <div className={classes.root}>

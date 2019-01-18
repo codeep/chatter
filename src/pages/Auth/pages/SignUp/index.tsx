@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 
-import InputRenderer from '../../../../components/InputRenderer';
+import InputRenderer from 'components/InputRenderer';
 
 import { auth } from 'store';
 
