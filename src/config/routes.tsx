@@ -1,23 +1,23 @@
-import React from 'react';
-import App from '../pages/App';
-import Auth from '../pages/Auth';
-import Index from '../pages/App/pages/Index';
-import SignUp from '../pages/Auth/pages/SignUp';
-import SignIn from '../pages/Auth/pages/SignIn';
-import { Redirect } from 'react-router-dom';
+import React, { ComponentType } from 'react';
+import App from 'pages/App';
+import Auth from 'pages/Auth';
+import Index from 'pages/App/pages/Index';
+import SignUp from 'pages/Auth/pages/SignUp';
+import SignIn from 'pages/Auth/pages/SignIn';
 
-const Authenticated = (C: any, authRouth: boolean) => (props: any) => {
+const Authenticated = (PageComponent: ComponentType, authRouth: boolean): any => (props: any): any => {
   const authToken = localStorage.getItem('auth-token');
   const authenticated = !!authToken;
+  const { history } = props;
 
   if (authenticated !== authRouth) {
-    return <Redirect to={authRouth ? '/sign-in' : '/'} />;
+    history.push(authRouth ? '/sign-in' : '/');
   };
 
-  return <C {...props} />;
+  return <PageComponent {...props} />;
 }
 
-const Root = (props: any) => {
+const Root = (props: any): any => {
   const authToken = localStorage.getItem('auth-token');
   const authenticated = !!authToken;
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
-const styles = (theme: any) => ({
+const styles = (theme: any): any => ({
   root: {
     flexGrow: 1,
   },
@@ -25,7 +24,24 @@ const styles = (theme: any) => ({
   },
 });
 
-class NavBar extends React.Component<any, any> {
+type Props = {
+  classes: any;
+  history: any;
+};
+
+class NavBar extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+  handleSignOut() {
+    const { history } = this.props;
+
+    localStorage.removeItem('auth-token');
+    history.push('/sign-in');    
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -39,7 +55,7 @@ class NavBar extends React.Component<any, any> {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               News
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={this.handleSignOut}>Sign out</Button>
           </Toolbar>
         </AppBar>
       </div>

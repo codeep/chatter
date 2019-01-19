@@ -2,7 +2,7 @@ import { matchRoutes } from 'react-router-config';
 import { match } from 'react-router';
 import { Store } from 'redux';
 
-import routes from '../config/routes';
+import routes from 'config/routes';
 import { store } from '../';
 
 export type LoadDataConfig = { match: match<any>; store: Store };

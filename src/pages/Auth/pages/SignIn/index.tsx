@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 
-import InputRenderer from '../../../../components/InputRenderer';
+import InputRenderer from 'components/InputRenderer';
 
 import { auth, users } from 'store';
 
@@ -41,20 +40,38 @@ class SignInComponent extends Component<any, any> {
     super(props);
 
     this.state = {
-      signedIn: false,
       wrongEmailOrPassword: false,
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(values: any, actions: any) {
+    const { submitSignIn, currentUser, history } = this.props;
+
+    submitSignIn(values)
+      .then(({ response: { authToken } }: any) => {
+        if(authToken) {
+          localStorage.setItem('auth-token', authToken);
+          return currentUser()
+            .then(() => history.push('/'));
+        }
+
+        this.setState({
+          wrongEmailOrPassword: true,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          wrongEmailOrPassword: true,
+        });
+      })
   }
 
   render() {
-    const { submitSignIn, currentUser } = this.props;
-    const { signedIn, wrongEmailOrPassword } = this.state;
+    const { wrongEmailOrPassword } = this.state;
     const initialValues: any = {};
     signInInputs.forEach((input) => initialValues[input.name] = '');
-
-    if(signedIn) {
-      return (<Redirect to='/' />);
-    }
 
     return (
       <Grid item xs={12} sm={8} md={6}>
@@ -65,25 +82,7 @@ class SignInComponent extends Component<any, any> {
         <Formik
           initialValues={initialValues}
           validationSchema={SignInSchema}
-          onSubmit={(values, actions) => {
-            submitSignIn(values)
-              .then(({ response: { authToken } }: any) => {
-                if(authToken) {
-                  localStorage.setItem('auth-token', authToken);
-                  return currentUser()
-                    .then(() => this.setState({signedIn: true}));
-                }
-
-                this.setState({
-                  wrongEmailOrPassword: true,
-                });
-              })
-              .catch(() => {
-                this.setState({
-                  wrongEmailOrPassword: true,
-                });
-              })
-          }}
+          onSubmit={this.onSubmit}
           render={({ values, handleChange, errors, touched }: any) => (
             <Form>
               {

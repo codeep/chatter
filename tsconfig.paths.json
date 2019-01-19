@@ -5,7 +5,8 @@
       "store": ["src/store"],
       "helpers/*": ["src/helpers/*"],
       "pages/*": ["src/pages/*"],
-      "config/*": ["src/config/*"]
+      "config/*": ["src/config/*"],
+      "components/*": ["src/components/*"]
     }
   }
 }
