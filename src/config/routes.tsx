@@ -12,18 +12,18 @@ const Authenticated = (PageComponent: ComponentType, authRouth: boolean): any =>
 
   if (authenticated !== authRouth) {
     history.push(authRouth ? '/sign-in' : '/');
-  };
+  }
 
   return <PageComponent {...props} />;
-}
+};
 
 const Root = (props: any): any => {
   const authToken = localStorage.getItem('auth-token');
   const authenticated = !!authToken;
 
   return authenticated ? <App {...props} /> : <Auth {...props} />;
-}
- 
+};
+
 const routes = [
   {
     path: '/',
@@ -32,21 +32,20 @@ const routes = [
       {
         path: '/',
         component: Authenticated(Index, true),
-        exact: true
+        exact: true,
       },
       {
         path: '/sign-up',
         component: Authenticated(SignUp, false),
-        exact: true
+        exact: true,
       },
       {
         path: '/sign-in',
         component: Authenticated(SignIn, false),
-        exact: true
+        exact: true,
       },
     ],
   },
 ];
 
 export default routes;
-

@@ -11,7 +11,7 @@ export const signUp = (newUser: any): ApiAction => ({
     endpoint: `/auth/sign-up`,
     method: 'POST',
     body: newUser,
-  }
+  },
 });
 
 export const signIn = (newUser: any): ApiAction => ({
@@ -24,5 +24,5 @@ export const signIn = (newUser: any): ApiAction => ({
     endpoint: `/auth/sign-in`,
     method: 'POST',
     body: newUser,
-  }
+  },
 });

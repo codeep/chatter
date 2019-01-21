@@ -21,7 +21,7 @@ export type State = {
 };
 
 const DEFAULT_STATE: State = {
-  users: {}
+  users: {},
 };
 
 // Updates an entity cache in response to any action with response.entities.

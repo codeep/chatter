@@ -7,7 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-
 type Props = {
   label: string;
   name: string;
@@ -32,12 +31,12 @@ const InputRenderer = (props: Props) => {
       value={value}
       inputProps={{
         id: name,
-        name
+        name,
       }}
       {...inputProps}
     >
       {
-        values && 
+        values &&
         Object.keys(values).map((key) => <MenuItem key={key} value={key}>{values[key]}</MenuItem>)
       }
     </Select>
@@ -50,7 +49,7 @@ const InputRenderer = (props: Props) => {
       value={value}
       {...inputProps}
     />;
-  
+
   return (
     <FormControl {...formControlProps} error={errCondition}>
       { type === 'select' && <InputLabel htmlFor={name}>{label}</InputLabel> }
@@ -58,6 +57,6 @@ const InputRenderer = (props: Props) => {
       { errCondition && <FormHelperText>{errors[name]}</FormHelperText> }
     </FormControl>
   );
-}
+};
 
 export default InputRenderer;

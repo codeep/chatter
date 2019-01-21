@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-
 const styles = (theme: any): any => ({
   root: {
     flexGrow: 1,
@@ -39,7 +38,7 @@ class NavBar extends React.Component<Props> {
     const { history } = this.props;
 
     localStorage.removeItem('auth-token');
-    history.push('/sign-in');    
+    history.push('/sign-in');
   }
 
   render() {

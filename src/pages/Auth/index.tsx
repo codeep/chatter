@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = (theme: Theme) => ({
   rootContainer: {
     padding: '15px',

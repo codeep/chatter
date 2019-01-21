@@ -19,6 +19,6 @@ class SignInComponent extends Component<any, any> {
 const CompareList = connect(
   null,
   null,
-)(SignInComponent)
+)(SignInComponent);
 
 export default CompareList;

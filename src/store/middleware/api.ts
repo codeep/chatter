@@ -28,7 +28,7 @@ const callApi = async (config: Config) => {
   const request = new Request(fullUrl, {
     body: stringBody,
     method,
-    headers
+    headers,
   });
 
   const response = await fetch(request);
@@ -46,7 +46,7 @@ const callApi = async (config: Config) => {
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
 export default () => (store: Store) => (next: any) => (
-  action: common.ApiAction
+  action: common.ApiAction,
 ) => {
   const callAPI = action[common.CALL_API];
 
@@ -96,8 +96,8 @@ export default () => (store: Store) => (next: any) => (
         actionWith({
           response,
           type: successType,
-          requestAction
-        })
+          requestAction,
+        }),
       );
     },
     error => {
@@ -105,9 +105,9 @@ export default () => (store: Store) => (next: any) => (
         actionWith({
           type: failureType,
           error: error.message || 'Something bad happened',
-          requestAction
-        })
+          requestAction,
+        }),
       );
-    }
+    },
   );
 };
