@@ -1,11 +1,11 @@
 import { matchRoutes } from 'react-router-config';
-import { match } from 'react-router';
+import { match as matchDef } from 'react-router';
 import { Store } from 'redux';
 
 import routes from 'config/routes';
 import { store } from '../';
 
-export type LoadDataConfig = { match: match<any>; store: Store };
+export type LoadDataConfig = { match: matchDef<any>; store: Store };
 export type LoadData = (config: LoadDataConfig) => Promise<any>;
 
 const loadBranchData = (pathname: string) => {

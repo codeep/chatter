@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
-
 const SignUpSchema = yup.object().shape({
   firstName: yup.string()
     .min(2, 'Too Short!')
@@ -36,38 +35,38 @@ const SignUpSchema = yup.object().shape({
     .required('Required'),
 });
 
-const signUpInputs = [{ 
+const signUpInputs = [{
   name: 'firstName',
   label: 'First name',
   type: 'text',
-}, { 
+}, {
   name: 'lastName',
   label: 'Last name',
   type: 'text',
-}, { 
+}, {
   name: 'emailOrPhone',
   label: 'Email',
   type: 'text',
-}, { 
+}, {
   name: 'gender',
   label: 'Gender',
   type: 'select',
   values: {
-    male: "Male",
-    female: "Female",
+    male: 'Male',
+    female: 'Female',
   },
-}, { 
+}, {
   name: 'birthDay',
   label: 'Birth day',
   type: 'date',
-}, { 
+}, {
   name: 'password',
   label: 'Password',
   type: 'password',
 }];
 
 class SignUpComponent extends Component<any, any> {
-  render() {
+  public render() {
     const { submitSignUp } = this.props;
     const initialValues: any = {};
     signUpInputs.forEach((input) => initialValues[input.name] = '');
@@ -92,15 +91,14 @@ class SignUpComponent extends Component<any, any> {
                     key={input.name}
                     {...input}
                     value={values[input.name]}
-                    errors={errors} 
+                    errors={errors}
                     touched={touched}
                     handler={handleChange}
                     formControlProps={{
                       fullWidth: true,
                       margin: 'normal',
                     }}
-                  />
-                )
+                  />)
               }
               <FormControl fullWidth={true} margin="normal">
                 <Button type="submit" variant="contained" size="large" color="primary">
@@ -123,6 +121,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 const CompareList = connect(
   null,
   mapDispatchToProps,
-)(SignUpComponent)
+)(SignUpComponent);
 
 export default CompareList;

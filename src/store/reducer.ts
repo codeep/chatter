@@ -3,7 +3,7 @@ import * as modules from './modules';
 
 const reducers: ReducersMapObject = {};
 
-for (let i in modules) {
+for (const i in modules) {
   reducers[i] = (modules as any)[i].reducer;
 }
 

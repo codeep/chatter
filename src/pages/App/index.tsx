@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 
 import NavBar from 'components/NavBar';
 
-
 const styles = (theme: Theme) => ({
   rootContainer: {
     padding: '15px',

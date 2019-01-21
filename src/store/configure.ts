@@ -11,7 +11,7 @@ const configure = () => {
   const store = createStore(
     reducer,
     {},
-    composeWithDevTools(applyMiddleware(thunk, api))
+    composeWithDevTools(applyMiddleware(thunk, api)),
   );
 
   return store;

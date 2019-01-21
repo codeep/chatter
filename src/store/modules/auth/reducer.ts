@@ -9,7 +9,7 @@ const auth = (state = {}, action: AnyAction) => {
     case SIGN_IN_USER_SUCCESS:
       return {
         ...state,
-        user: action.response.result
+        user: action.response.result,
       };
 
     default:

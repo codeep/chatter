@@ -17,5 +17,5 @@ ReactDOM.render(
       <PendingNavDataLoader>{renderRoutes(routes)}</PendingNavDataLoader>
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

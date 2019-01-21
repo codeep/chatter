@@ -10,12 +10,12 @@ import loadBranchData from './helpers/loadBranchData';
 NProgress.configure({ showSpinner: false });
 
 type Props = RouteComponentProps<{}>;
-type State = { previousLocation: null | Location; initialRender: boolean };
+type State = { previousLocation: null | Location; initialRender: boolean; };
 
 class PendingNavDataLoader extends Component<Props, State> {
   state = {
     previousLocation: null,
-    initialRender: true
+    initialRender: true,
   };
 
   loadData = async (props: Props) => {
@@ -23,9 +23,9 @@ class PendingNavDataLoader extends Component<Props, State> {
 
     // clear previousLocation so the next screen renders
     this.setState({
-      previousLocation: null
+      previousLocation: null,
     });
-  };
+  }
 
   async componentWillReceiveProps(nextProps: Props) {
     const navigated = nextProps.location !== this.props.location;
@@ -33,7 +33,7 @@ class PendingNavDataLoader extends Component<Props, State> {
     if (navigated) {
       // save the location so we can render the old screen
       this.setState({
-        previousLocation: this.props.location
+        previousLocation: this.props.location,
       });
 
       NProgress.start();
@@ -59,7 +59,7 @@ class PendingNavDataLoader extends Component<Props, State> {
         style={{
           alignItems: 'center',
           display: 'flex',
-          height: '100vh'
+          height: '100vh',
         }}
       >
         <Loader active inline="centered" />

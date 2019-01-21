@@ -1,0 +1,18 @@
+{
+    "defaultSeverity": "error",
+    "extends": "./node_modules/tslint/lib/configs/recommended",
+    "jsRules": {},
+    "rules": {
+        "quotemark": {
+            "options": ["single", "jsx-double", "avoid-escape"]
+        },
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "interface-name": ["never-prefix"],
+        "member-access": false,
+        "interface-over-type-literal": false,
+        "arrow-parens": false,
+        "forin": false
+    },
+    "rulesDirectory": []
+}

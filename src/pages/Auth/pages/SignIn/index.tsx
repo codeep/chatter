@@ -14,7 +14,6 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
 const SignInSchema = yup.object().shape({
   emailOrPhone: yup.string()
     .email('Invalid email')
@@ -25,11 +24,11 @@ const SignInSchema = yup.object().shape({
     .required('Required'),
 });
 
-const signInInputs = [{ 
+const signInInputs = [{
   name: 'emailOrPhone',
   label: 'Email',
   type: 'text',
-}, { 
+}, {
   name: 'password',
   label: 'Password',
   type: 'password',
@@ -46,12 +45,12 @@ class SignInComponent extends Component<any, any> {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values: any, actions: any) {
+  public onSubmit(values: any, actions: any) {
     const { submitSignIn, currentUser, history } = this.props;
 
     submitSignIn(values)
       .then(({ response: { authToken } }: any) => {
-        if(authToken) {
+        if (authToken) {
           localStorage.setItem('auth-token', authToken);
           return currentUser()
             .then(() => history.push('/'));
@@ -65,10 +64,10 @@ class SignInComponent extends Component<any, any> {
         this.setState({
           wrongEmailOrPassword: true,
         });
-      })
+      });
   }
 
-  render() {
+  public render() {
     const { wrongEmailOrPassword } = this.state;
     const initialValues: any = {};
     signInInputs.forEach((input) => initialValues[input.name] = '');
@@ -91,17 +90,16 @@ class SignInComponent extends Component<any, any> {
                     key={input.name}
                     {...input}
                     value={values[input.name]}
-                    errors={errors} 
+                    errors={errors}
                     touched={touched}
                     handler={handleChange}
                     formControlProps={{
                       fullWidth: true,
                       margin: 'normal',
                     }}
-                  />
-                )
+                  />)
               }
-              <Typography color='error' align='center'>
+              <Typography color="error" align="center">
                 {wrongEmailOrPassword && 'Wrong email or password'}
               </Typography>
               <FormControl fullWidth={true} margin="normal">
@@ -126,6 +124,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 const CompareList = connect(
   null,
   mapDispatchToProps,
-)(SignInComponent)
+)(SignInComponent);
 
 export default CompareList;
