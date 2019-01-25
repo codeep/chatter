@@ -2,6 +2,8 @@ import React, { ComponentType } from 'react';
 import App from 'pages/App';
 import Auth from 'pages/Auth';
 import Index from 'pages/App/pages/Index';
+import Conversations from 'pages/App/pages/Chat/Conversations';
+import Chat from 'pages/App/pages/Chat';
 import SignUp from 'pages/Auth/pages/SignUp';
 import SignIn from 'pages/Auth/pages/SignIn';
 
@@ -33,6 +35,16 @@ const routes = [
         path: '/',
         component: Authenticated(Index, true),
         exact: true,
+      },
+      {
+        path: '/chat',
+        component: Authenticated(Conversations, true),
+        routes: [
+          {
+            path: '/chat/:conversationId',
+            component: Authenticated(Chat, true),
+          },
+        ],
       },
       {
         path: '/sign-up',

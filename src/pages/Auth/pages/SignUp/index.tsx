@@ -81,6 +81,7 @@ class SignUpComponent extends Component<any, any> {
           initialValues={initialValues}
           validationSchema={SignUpSchema}
           onSubmit={(values, actions) => {
+            console.log(values)
             submitSignUp(values);
           }}
           render={({ values, handleChange, errors, touched }: any) => (

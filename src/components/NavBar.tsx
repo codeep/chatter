@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -13,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 const styles = (theme: any): any => ({
   root: {
     flexGrow: 1,
+    zIndex: 1,
   },
   grow: {
     flexGrow: 1,
@@ -26,6 +26,7 @@ const styles = (theme: any): any => ({
 type Props = {
   classes: any;
   history: any;
+  currentUser: any;
 };
 
 class NavBar extends React.Component<Props> {
@@ -42,7 +43,7 @@ class NavBar extends React.Component<Props> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, currentUser: { firstName } } = this.props;
 
     return (
       <div className={classes.root}>
@@ -52,8 +53,9 @@ class NavBar extends React.Component<Props> {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              News
+              {firstName}
             </Typography>
+            <Link to="/chat">Chat</Link>
             <Button color="inherit" onClick={this.handleSignOut}>Sign out</Button>
           </Toolbar>
         </AppBar>

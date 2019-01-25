@@ -11,7 +11,6 @@ import { auth, users } from 'store';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 const SignInSchema = yup.object().shape({
@@ -45,14 +44,14 @@ class SignInComponent extends Component<any, any> {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  public onSubmit(values: any, actions: any) {
-    const { submitSignIn, currentUser, history } = this.props;
+  onSubmit(values: any, actions: any) {
+    const { submitSignIn, fetchCurrentUser, history } = this.props;
 
     submitSignIn(values)
-      .then(({ response: { authToken } }: any) => {
-        if (authToken) {
-          localStorage.setItem('auth-token', authToken);
-          return currentUser()
+      .then(({ response: { token } }: any) => {
+        if (token) {
+          localStorage.setItem('auth-token', token);
+          return fetchCurrentUser()
             .then(() => history.push('/'));
         }
 
@@ -67,7 +66,7 @@ class SignInComponent extends Component<any, any> {
       });
   }
 
-  public render() {
+  render() {
     const { wrongEmailOrPassword } = this.state;
     const initialValues: any = {};
     signInInputs.forEach((input) => initialValues[input.name] = '');
@@ -118,7 +117,7 @@ class SignInComponent extends Component<any, any> {
 
 const mapDispatchToProps = (dispatch: any) => ({
   submitSignIn: (values: any) => dispatch(auth.signIn(values)),
-  currentUser: () => dispatch(users.fetchCurrent()),
+  fetchCurrentUser: () => dispatch(users.fetchCurrent()),
 });
 
 const CompareList = connect(

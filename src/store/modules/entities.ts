@@ -16,6 +16,13 @@ export type User = {
   gender: string;
 };
 
+export type Conversation = {
+  id: common.Id;
+  interlocutorId: common.Id;
+  interlocutor: User;
+  lastMessage: object;
+};
+
 export type State = {
   users: Entity<User>;
 };

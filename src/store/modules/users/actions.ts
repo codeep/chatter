@@ -13,3 +13,15 @@ export const fetchCurrent = (): ApiAction => ({
     schema: user,
   },
 });
+
+export const fetchUser = (userId: number): ApiAction => ({
+  [CALL_API]: {
+    types: [
+      constants.FETCH_REQUEST,
+      constants.FETCH_SUCCESS,
+      constants.FETCH_FAILURE,
+    ],
+    endpoint: `/users/${userId}`,
+    schema: user,
+  },
+});

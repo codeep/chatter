@@ -1,5 +1,4 @@
 import { normalize, Schema } from 'normalizr';
-import { camelizeKeys, decamelizeKeys } from 'humps';
 import { Store } from 'redux';
 import { common } from '../';
 
@@ -16,13 +15,13 @@ interface Config {
 // This makes every API response have the same shape, regardless of how nested it was.
 const callApi = async (config: Config) => {
   const { endpoint, schema, body, method = 'GET' } = config;
-  const stringBody = body && JSON.stringify(decamelizeKeys(body));
+  const stringBody = body && JSON.stringify(body);
   const fullUrl = API_ROOT + endpoint;
   const authToken = localStorage.getItem('auth-token');
 
   const headers = new Headers({
     'content-type': 'application/json',
-    'Autorization': authToken || '',
+    'Authorization': authToken || '',
   });
 
   const request = new Request(fullUrl, {
@@ -38,9 +37,8 @@ const callApi = async (config: Config) => {
   }
 
   const json = await response.json().catch(() => ({}));
-  const camelizedJson = camelizeKeys(json);
 
-  return schema ? normalize(camelizedJson, schema) : camelizedJson;
+  return schema ? normalize(json, schema) : json;
 };
 
 // A Redux middleware that interprets actions with CALL_API info specified.
